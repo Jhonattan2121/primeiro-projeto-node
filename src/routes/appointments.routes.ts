@@ -1,15 +1,16 @@
 /* eslint-disable prettier/prettier */
 import { Router } from "express";
-import { getCustomRepository } from "typeorm";
+
 import { parseISO } from "date-fns";
 
 import AppointmentsRepository from "../repositories/AppointmentsRepository";
 import CreateAppointmentService from "../services/CreateAppointmentService";
+import { AppDataSource } from "../database/data-source"
 
 const appointmentsRouter = Router();
 
 appointmentsRouter.get("/", async (request, response) => {
-  const appointmentsRepository = getCustomRepository(AppointmentsRepository);
+  const appointmentsRepository = AppDataSource.getRepository(AppointmentsRepository);
   const appointments = await appointmentsRepository.find();
 
   return response.json(appointments);

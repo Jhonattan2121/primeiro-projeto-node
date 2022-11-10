@@ -5,22 +5,22 @@ import { getCustomRepository } from "typeorm";
 import Appointment from "../models/Appointment";
 import AppointmentsRepository from "../repositories/AppointmentsRepository";
 
-interface Request {
+interface IRequest {
   date: Date;
   provider: string;
 }
 
 class CreateAppointmentService {
 
-  public async execute({ date, provider }: Request): Promise<Appointment> {
-    const appointmentsRepository = getCustomRepository(AppointmentsRepository);
+  public async execute({ date, provider }: IRequest): Promise<Appointment> {
+    const appointmentsRepository =  getCustomRepository(AppointmentsRepository);
 
     const appointmentDate = startOfHour(date);
 
     const findAppointmentInSameDate =
-      appointmentRepository.findByDate(appointmentDate,);
+      await appointmentsRepository.findByDate(appointmentDate);
 
-    if (await findAppointmentInSameDate) {
+    if (findAppointmentInSameDate) {
       throw Error("this appointment is already booked");
     }
 
@@ -29,7 +29,7 @@ class CreateAppointmentService {
       date: appointmentDate,
     });
 
-    await appointmentsRepository.save(appointment)
+    await appointmentsRepository.save(appointment);
 
     return appointment;
   }

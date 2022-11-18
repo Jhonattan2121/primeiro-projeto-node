@@ -1,38 +1,30 @@
 /* eslint-disable prettier/prettier */
 import { startOfHour } from "date-fns";
-import { getCustomRepository } from "typeorm";
+
+import { Injectable } from "@nestjs/common";
 
 import Appointment from "../models/Appointment";
-import AppointmentsRepository from "../repositories/AppointmentsRepository";
-
+import { AppointmentsRepository } from "../repositories/AppointmentsRepository";
 interface IRequest {
   date: Date;
   provider: string;
 }
 
-class CreateAppointmentService {
+@Injectable()
+export class CreateAppointmentService{
+  constructor(private readonly appointmentRepository: AppointmentsRepository) {}
 
-  public async execute({ date, provider }: IRequest): Promise<Appointment> {
-    const appointmentsRepository =  getCustomRepository(AppointmentsRepository);
-
-    const appointmentDate = startOfHour(date);
-
-    const findAppointmentInSameDate =
-      await appointmentsRepository.findByDate(appointmentDate);
-
-    if (findAppointmentInSameDate) {
-      throw Error("this appointment is already booked");
-    }
-
-    const appointment = appointmentsRepository.create({
-      provider,
-      date: appointmentDate,
-    });
-
-    await appointmentsRepository.save(appointment);
-
-    return appointment;
+  async createUser(firstName: string, lastName: string):Promise<Appointment> {
+    return this.appointmentRepository.CreateAppointmentService(firstName, lastName);
   }
 }
+
+
+
+
+
+
+
+
 
 export default CreateAppointmentService;

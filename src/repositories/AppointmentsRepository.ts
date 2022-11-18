@@ -1,18 +1,28 @@
 /* eslint-disable prettier/prettier */
-import { EntityRepository, Repository } from "typeorm";
 
+import { InjectRepository } from "@nestjs/typeorm";
+import { Injectable } from "@nestjs/commonjs";
+import { MongoRepository } from "typeorm";
+ 
 import Appointment from "../models/Appointment";
 
+@Injectable()
+export class AppointmentsRepository {
+  constructor(
+    @InjectRepository(Appointment)
+    private readonly appointmentsRepository: MongoRepository<Appointment>,
 
-@EntityRepository(Appointment)
-class AppointmentsRepository extends Repository<Appointment> {
-  public async findByDate(date: Date): Promise<Appointment | null> {
-    const findAppointment = await this.findOne({
-      where: { date },
-    });
+  ) {}
 
-    return findAppointment || null;
-  }
+
+async CreateAppointmentService(firstName: string, lastName: string): Promise<Appointment> {
+  const appointment = new Appointment();
+
+  await this.appointmentsRepository.save(appointment);
+
+  return appointment;
+
+} 
+
+
 }
-
-export default AppointmentsRepository;

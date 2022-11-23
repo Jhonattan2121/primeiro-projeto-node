@@ -1,8 +1,8 @@
-/* eslint-disable prettier/prettier */
+
 import { Entity, Column, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity()
-export class Appointment {
+@Entity('appointment')
+ class Appointment {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 

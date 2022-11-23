@@ -1,28 +1,39 @@
-/* eslint-disable prettier/prettier */
-
-import { InjectRepository } from "@nestjs/typeorm";
-import { Injectable } from "@nestjs/commonjs";
-import { MongoRepository } from "typeorm";
- 
+import { isEqual } from "date-fns";
 import Appointment from "../models/Appointment";
 
-@Injectable()
-export class AppointmentsRepository {
-  constructor(
-    @InjectRepository(Appointment)
-    private readonly appointmentsRepository: MongoRepository<Appointment>,
-
-  ) {}
-
-
-async CreateAppointmentService(firstName: string, lastName: string): Promise<Appointment> {
-  const appointment = new Appointment();
-
-  await this.appointmentsRepository.save(appointment);
-
-  return appointment;
-
-} 
-
-
+interface CreateAppointmentDTO{
+  provider: string;
+  date: Date;
 }
+
+class AppointmentsRepository {
+  save(appointment: Appointment) {
+    throw new Error("Method not implemented.");
+  }
+  private appointments: Appointment[];
+
+  constructor() {
+    this.appointments = [];
+  }
+  
+  public all(): Appointment[] {
+    return this.appointments;
+  }
+
+  public findByDate(date: Date): Appointment | null {
+    const findAppointment =this.appointments.find(Appointment => 
+      isEqual(date, Appointment.date),
+      );
+      return findAppointment || null;
+  }
+
+  public  create({provider, date}: CreateAppointmentDTO): Appointment {
+    const appointment = new Appointment({provider, date});
+
+    this.appointments.push(appointment);
+
+    return appointment;
+  }
+}
+
+export default AppointmentsRepository;

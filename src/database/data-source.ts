@@ -1,9 +1,9 @@
-/* eslint-disable prettier/prettier */
+
 import { DataSource } from "typeorm";
 import "reflect-metadata";
 require("dotenv").config();
 
-// eslint-disable-next-line import/prefer-default-export
+
 export const AppDataSource = new DataSource({
   type: "postgres",
   host: "localhost",
@@ -11,12 +11,9 @@ export const AppDataSource = new DataSource({
   username: "postgres",
   password: "docker",
   database: "gostack_gobarber",
-  entities: ["./src/models/*.ts"],
-  synchronize: true,
-  logging: true,
-  subscribers: [],
-  migrations: ["./src/database/migrations/*.ts"],
-  
+  //entities: ["./src/models/*.ts"],
+  entities: [__dirname + './src/models/*.ts'],
+  migrations: ["./src/database/migrations/*.ts"]
 });
 
 AppDataSource.initialize()

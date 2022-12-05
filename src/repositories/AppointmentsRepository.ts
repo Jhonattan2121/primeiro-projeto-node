@@ -1,39 +1,17 @@
-import { isEqual } from "date-fns";
+import { EntityRepository, Repository } from "typeorm";
+
 import Appointment from "../models/Appointment";
 
-interface CreateAppointmentDTO{
-  provider: string;
-  date: Date;
-}
+@EntityRepository(Appointment)
+class AppointmentsRepository extends Repository<Appointment> { //responsavel por , criar , armazenar , deletar , editar 
+  public async findByDate(date: Date): Promise <Appointment | null> { //um por data 
+      const findAppointment = await this.findOne({
+        where: {date},
+      });
+      return findAppointment || null; // ta encontrando um compromisso 
 
-class AppointmentsRepository {
-  save(appointment: Appointment) {
-    throw new Error("Method not implemented.");
-  }
-  private appointments: Appointment[];
-
-  constructor() {
-    this.appointments = [];
-  }
-  
-  public all(): Appointment[] {
-    return this.appointments;
   }
 
-  public findByDate(date: Date): Appointment | null {
-    const findAppointment =this.appointments.find(Appointment => 
-      isEqual(date, Appointment.date),
-      );
-      return findAppointment || null;
-  }
-
-  public  create({provider, date}: CreateAppointmentDTO): Appointment {
-    const appointment = new Appointment({provider, date});
-
-    this.appointments.push(appointment);
-
-    return appointment;
-  }
 }
 
 export default AppointmentsRepository;

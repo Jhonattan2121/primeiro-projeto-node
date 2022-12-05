@@ -1,9 +1,3 @@
-/* eslint-disable prettier/prettier */
+import { createConnection} from 'typeorm';
 
-import { AppDataSource } from "./data-source";
-
-AppDataSource.initialize().then(() => {
-  console.log("Database connected");
-}).catch((error) => {
-  console.log("Error connecting to database", error);
-});
+createConnection();

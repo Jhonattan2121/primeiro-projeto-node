@@ -8,21 +8,30 @@ export default  class CreateAppointments1669924066259 implements MigrationInterf
             columns: [
               {
                 name: 'id',
-                type: 'varchar',
+                type: 'uuid',
                 isPrimary: true,
                 generationStrategy: 'uuid',
                 default: 'uuid_generate_v4()',
               },
               {
-                name: 'provider',
+                name: 'provider', 
                 type: 'varchar',
                 isNullable: false,
 
               },
               {
                 name: 'date',
+                type: 'timestamp with time zone',
+              },
+              {
+                name: 'created_at',
                 type: 'timestamp',
-                isNullable: false,
+                default: 'now()',
+              },
+              {
+                name: 'updated_at',
+                type: 'timestamp',
+                default: 'now()',
               },
             ],
         }),

@@ -2,6 +2,7 @@ import Appointment from "../models/Appointment";
 import AppointmentsRepository from "../repositories/AppointmentsRepository";
 import { startOfHour } from "date-fns";
 import { getCustomRepository } from "typeorm";
+import AppError from "../errors/AppError";
 
 /*
 * [x] recebimento de informacoes
@@ -11,9 +12,10 @@ import { getCustomRepository } from "typeorm";
 */ 
 
 interface Request { // DTO data transfer object
-  provider: string;
+  provider_id: string;
   date: Date;
 }
+
 
 /*
 * dependency inversion (SOLID) (inversão de dependência)
@@ -22,7 +24,7 @@ interface Request { // DTO data transfer object
  //DRY: dont repeat yourself
 
 class CreateAppointmentService { //executando a criancao de um novo appointment
-    public async execute({ date , provider }: Request): Promise <Appointment> {
+    public async execute({ date , provider_id }: Request): Promise <Appointment> {
       const appointmentsRepository = getCustomRepository(AppointmentsRepository);
 
       const appointmentDate = startOfHour(date); // regra de negocio , agendamento de hora em hora
@@ -30,12 +32,12 @@ class CreateAppointmentService { //executando a criancao de um novo appointment
       const findAppointmentInSameDate = await appointmentsRepository.findByDate(appointmentDate); // retornar um objeto appointmnet se tiver um agendamento pela data e um unico parametro data
 
     if (findAppointmentInSameDate) { //encontrando um appointment na mesma data
-      throw Error('this appointment is already booked'); //lancando um erro
+      throw new AppError('this appointment is already booked'); //lancando um erro
     
     } 
 
     const appointment = appointmentsRepository.create({ 
-    provider,
+    provider_id,
     date: appointmentDate,
   }); 
     await appointmentsRepository.save(appointment);

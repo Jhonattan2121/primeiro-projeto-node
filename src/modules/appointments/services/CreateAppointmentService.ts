@@ -1,28 +1,35 @@
-import Appointment from "../infra/typeorm/entities/Appointment";
-import AppointmentsRepository from "../infra/typeorm/repositories/AppointmentsRepository";
 import { startOfHour } from "date-fns";
-import { getCustomRepository } from "typeorm";
 import AppError from "@shared/errors/AppError";
+import Appointment from "../infra/typeorm/entities/Appointment";
+import IAppointmentsRepository from "../repositories/IAppointmentsRepository";
 
-interface Request { 
+//SOLID
+//Dependency Inversion Principle
+//Open Closed Principle
+//Liskov Substitution Principle
+//Interface Segregation Principle
+//Dependency Invertion Principle
+interface IRequest { 
   provider_id: string;
   date: Date;
 }
 
-class CreateAppointmentService { 
-    public async execute({ date , provider_id }: Request): Promise <Appointment> {
-      const appointmentsRepository = getCustomRepository(AppointmentsRepository);
+class CreateAppointmentService {
+  appointmentsRepository: any;
+  constructor( private AppointmentsRepository: IAppointmentsRepository, ) {}
+
+    public async execute({ date , provider_id }: IRequest): Promise <Appointment> {
 
       const appointmentDate = startOfHour(date); 
 
-      const findAppointmentInSameDate = await appointmentsRepository.findByDate(appointmentDate);
+      const findAppointmentInSameDate = await this.appointmentsRepository.findByDate(appointmentDate,);
 
     if (findAppointmentInSameDate) {
       throw new AppError('this appointment is already booked'); 
     
     } 
 
-    const appointment = await appointmentsRepository.create({ 
+    const appointment = await this.appointmentsRepository.create({ 
     provider_id,
     date: appointmentDate,
   }); 

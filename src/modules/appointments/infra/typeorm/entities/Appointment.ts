@@ -8,7 +8,7 @@ import { Entity ,
 } 
   from "typeorm";
 
-  import User from "@modules/users/infra/entities/User";
+  import User from "@modules/users/infra/http/typeorm/entities/User";
 @Entity('appointments')
 class Appointment {
 

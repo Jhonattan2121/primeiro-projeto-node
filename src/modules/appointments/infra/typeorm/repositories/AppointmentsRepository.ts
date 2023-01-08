@@ -4,15 +4,13 @@ import IAppointmentsRepository from "@modules/appointments/repositories/IAppoint
 
 import Appointment from "../entities/Appointment";
 
-@EntityRepository(Appointment)
-class AppointmentsRepository extends Repository<Appointment> 
-
 //solid
 
 //liskov substitution principle
 
-implements IAppointmentsRepository { //responsavel por , criar , armazenar , deletar , editar 
-  
+@EntityRepository(Appointment)
+class AppointmentsRepository extends Repository<Appointment> 
+  implements IAppointmentsRepository {
   public async findByDate(date: Date): Promise <Appointment | undefined> { //um por data 
       const findAppointment = await this.findOne({
         where: {date},

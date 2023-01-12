@@ -9,9 +9,6 @@ import Appointment from "../entities/Appointment";
 //liskov substitution principle
 
 class AppointmentsRepository implements IAppointmentsRepository {
-  find() {
-    throw new Error("Method not implemented.");
-  }
   private ormRepository: Repository<Appointment>;
   constructor() {
     this.ormRepository = getRepository(Appointment);

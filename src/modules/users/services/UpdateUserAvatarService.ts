@@ -1,5 +1,5 @@
 import path from 'path';
-import User from "../infra/http/typeorm/entities/User";
+import User from '../infra/typeorm/entities/User';
 import uploadConfig from "@config/upload";
 import fs from 'fs';
 import AppError from "@shared/errors/AppError";

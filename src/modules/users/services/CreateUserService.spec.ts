@@ -3,7 +3,7 @@ import AppError from "@shared/errors/AppError";
 import FakeUsersRepository from '../repositories/fakes/FakeUsersRepository';
 import CreateUserService from './CreateUserService';
 describe('CreateUser', () => {
-  it('should be able to create a new appointment', async () => {
+  it('should be able to create a new use', async () => {
     const fakeUsersRepository = new FakeUsersRepository();
     const fakeHashProvider = new FakeHashProvider();
     const createUser = new CreateUserService(
@@ -25,7 +25,7 @@ describe('CreateUser', () => {
       fakeUsersRepository,
       fakeHashProvider
     );
-    const user = await createUser.execute({
+    await createUser.execute({
         name: 'Jhon Ferri',
         email:  'jhonferri@gmail.com',
         password: '123456789',

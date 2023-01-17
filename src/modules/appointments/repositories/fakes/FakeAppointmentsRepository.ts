@@ -2,7 +2,7 @@ import { v4 as uuid_v4 } from "uuid";
 import { isEqual } from "date-fns";
 import IAppointmentsRepository from "@modules/appointments/repositories/IAppointmentsRepository";
 import ICreateAppointmentDTO from "@modules/appointments/dtos/ICreateAppointmentDTO";
-import Appointment from "../../infra/typeorm/entities/Appointment";
+import Appointment from "../../infra/typeorm/entities/Appointments";
 
 //solid
 

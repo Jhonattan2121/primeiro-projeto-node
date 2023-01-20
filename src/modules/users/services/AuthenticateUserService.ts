@@ -1,11 +1,11 @@
 
   import { sign } from 'jsonwebtoken';
+  import User from "../infra/typeorm/entities/User";
   import authConfig from "@config/auth";
   import {inject, injectable} from 'tsyringe';
   import AppError from "@shared/errors/AppError";
   import IhashProvider from '../providers/HashProvider/models/IHashProvider';
 
-  import User from "../infra/typeorm/entities/User";
   import IUsersRepository from "../repositories/IUsersRepository";
 
 
@@ -26,15 +26,16 @@ class AuthenticateUserService {
     private usersRepository: IUsersRepository,
     
     @inject('HashProvider')
-    private hashProvider: IhashProvider,
+    private BCryptHashProvider: IhashProvider,
     ) {}
-  public async execute({email, password}: IRequest): Promise <IResponse> {
+  public async execute({email, password}: IRequest): Promise <any> {
+
     const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError('Incorrect email/password combination.', 401);
     }
-    const passwordMatched = await this.hashProvider.compareHash(password, user.password);
+    const passwordMatched = await this.BCryptHashProvider.compareHash(password, user.password);
 
     if(!passwordMatched) {
       throw new AppError('Incorrect email/password combination.', 401);
@@ -48,8 +49,7 @@ class AuthenticateUserService {
     });
 
     return {
-      user,
-      token,
+     email, password
     };
 
   }

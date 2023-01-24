@@ -1,12 +1,17 @@
-import 'reflect-metadata';
+import ISendMailDTO from '../dtos/ISendMailDTO';
+import { injectable, inject } from 'tsyringe';
 import nodemailer, { Transporter } from 'nodemailer';
 import IMailProvider from "../models/IMailProvider";
+import IMailTemplateprovider from '../../MailTemplateProvider/models/IMailTemplateProvider';
 
+@injectable()
 export default class EtherealMailProvider implements IMailProvider {
   private client: Transporter
 
-  constructor() {
-    console.log('asd')
+  constructor(
+    @inject("MailTemplateProvider")
+    private mailTemplateProvider: IMailTemplateprovider,
+  ) {
    nodemailer.createTestAccount().then(account => {
     const  transporter =  nodemailer.createTransport({
       host: account.smtp.host,
@@ -21,12 +26,18 @@ export default class EtherealMailProvider implements IMailProvider {
   this.client = transporter;
    });
   }
- public async sendMail(to: string, body: string): Promise<void> {
+ public async sendMail({to, subject, from, templateData}: ISendMailDTO): Promise<void> {
   const message =  await  this.client.sendMail({
-    from: 'Equipe GoBarber <equipe@gobarber.com.br>',
-    to,
-    subject: 'Recuperação de senha',
-    text: body,
+    from: {
+      name: from?.name || "Equipe GoBarber",
+      address: from?.email || "equipe@Gobarber.com.br",
+    },
+    to: {
+      name: to.name, 
+      address: to.email
+    },
+    subject,
+    html: await this.mailTemplateProvider.parse(templateData),
     
    });
 

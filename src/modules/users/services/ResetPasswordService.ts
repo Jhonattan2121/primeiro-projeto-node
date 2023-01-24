@@ -1,10 +1,10 @@
-import {inject, injectable} from 'tsyringe';
-import { isAfter, addHours } from 'date-fns';
-import AppError from '@shared/errors/AppError';
-import IhashProvider from '../providers/HashProvider/models/IHashProvider';
-import IUserTokensRepository from '../repositories/IUserTokensRepository';
-import IUsersRepository from '../repositories/IUsersRepository';
+import { inject, injectable } from 'tsyringe';
+import { isAfter, addHours } from 'date-fns'
 
+import AppError from '@shared/errors/AppError';
+import IUsersRepository from '../repositories/IUsersRepository';
+import IUserTokensRepository from '../repositories/IUserTokensRepository';
+import IHashProvider  from '../providers/HashProvider/models/IHashProvider'
 
 interface IRequest {
   token: string;
@@ -23,7 +23,7 @@ interface IRequest {
   private userTokensRepository: IUserTokensRepository,
 
   @inject('HashProvider')
-  private hashProvider: IhashProvider,
+  private hashProvider: IHashProvider,
   ) {}
 
   public async execute({token, password }: IRequest): Promise<void> { 

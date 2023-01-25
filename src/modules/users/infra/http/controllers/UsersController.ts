@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
 import {container}  from 'tsyringe';
+
 import CreateUserService from "@modules/users/services/CreateUserService";
 
 //Index:  mostrar uma listagem ,  SHow: mostrar um unico, create: pra criar, Update: pra  atualizar, Delete: pra deletar

@@ -22,7 +22,7 @@ export default class EtherealMailProvider implements IMailProvider {
           pass: account.pass,
       },
   });
-  console.log(account);
+  
   this.client = transporter;
    });
   }
@@ -41,8 +41,6 @@ export default class EtherealMailProvider implements IMailProvider {
     
    });
 
-   console.log("Message sent: %s", message.messageId);
-  console.log("Preview URL: %s", nodemailer.getTestMessageUrl(message));
   
   }
 }

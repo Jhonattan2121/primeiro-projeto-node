@@ -8,18 +8,20 @@ describe('ListProviders', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
 
-    listProviders = new ListProvidersService(fakeUsersRepository);
+    listProviders = new ListProvidersService(
+      fakeUsersRepository
+      );
   });
-  it('should be able to list providers', async () => {
+  it('should be able to list the providers', async () => {
    const  user1 = await fakeUsersRepository.create({
       name: 'Pedro Pascal',
-      email: 'pedropascal@cal.com',
+      email: 'pedropascal@test.com',
       password: 'eusou',
     });
 
    const user2 = await fakeUsersRepository.create({
-      name: 'Jhon F',
-      email: 'jhonf@example.com',
+      name: 'Jhon Ferri',
+      email: 'jhonferri@test.com',
       password: 'ruimdemais',
     });
 

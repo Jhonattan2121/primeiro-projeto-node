@@ -13,10 +13,10 @@ let authenticateUser: AuthenticateUserService;
 describe('AuthenticateUser', () => {
   beforeEach(() => {
     fakeUsersRepository = new FakeUsersRepository();
-     fakeHashProvider = new FakeHashProvider();
+    fakeHashProvider = new FakeHashProvider();
 
-     createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider,  );
-     authenticateUser = new AuthenticateUserService(
+    createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider,);
+    authenticateUser = new AuthenticateUserService(
       fakeUsersRepository,
       fakeHashProvider,
     );
@@ -37,25 +37,25 @@ describe('AuthenticateUser', () => {
     expect(response.user).toEqual(user);
   });
 
-  it('should not be able to authenticate with non existing user' , async () => {
-    await  expect(authenticateUser.execute ({
-        email: 'jhonferri@gmail.com',
-        password: '123456789'
-      }),
-      ).rejects.toBeInstanceOf(AppError);
-    });
+  it('should not be able to authenticate with non existing user', async () => {
+    await expect(authenticateUser.execute({
+      email: 'jhonferri@gmail.com',
+      password: '123456789'
+    }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 
   it('should not be able to authenticate with invalid password', async () => {
-       await createUser.execute({
-          name: 'Jhon Ferri',
-          email:  'jhonferri@gmail.com',
-          password: '123456789',
-        });
-
-       await  expect(authenticateUser.execute({
-          email:  'jhonferri@gmail.com',
-          password: 'wrong-password',
-        }),
-        ).rejects.toBeInstanceOf(AppError);
+    await createUser.execute({
+      name: 'Jhon Ferri',
+      email: 'jhonferri@gmail.com',
+      password: '123456789',
     });
+
+    await expect(authenticateUser.execute({
+      email: 'jhonferri@gmail.com',
+      password: 'wrong-password',
+    }),
+    ).rejects.toBeInstanceOf(AppError);
+  });
 });

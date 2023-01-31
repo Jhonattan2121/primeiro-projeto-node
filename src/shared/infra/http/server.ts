@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import 'dotenv/config';
 
-import express, {Request, Response, NextFunction} from "express";
+import express, { Request, Response, NextFunction } from "express";
 import cors from 'cors';
 import 'express-async-errors';
 
@@ -20,15 +20,15 @@ app.use('/files', express.static(uploadConfig.uploadsFolder));
 app.use(routes);
 
 app.use(
-  (err: Error, request: Request, response: Response, _: NextFunction) =>{
-  if (err instanceof AppError) {
-    return response.status(err.statusCode).json({
-      status: 'error',
-      message: err.message,
+  (err: Error, request: Request, response: Response, _: NextFunction) => {
+    if (err instanceof AppError) {
+      return response.status(err.statusCode).json({
+        status: 'error',
+        message: err.message,
       });
-    } 
+    }
 
-      console.error(err);
+    console.error(err);
 
     return response.status(500).json({
       status: 'error',
@@ -39,6 +39,6 @@ app.use(
 );
 
 app.listen(3333, () => {
-  
+
   console.log("server iniciado 3333");
 });

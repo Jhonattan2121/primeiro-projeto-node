@@ -6,4 +6,3 @@ export default interface IParseMailproviderDTO {
   file: string;
   variables: ITemplateVariables;
 }
- 

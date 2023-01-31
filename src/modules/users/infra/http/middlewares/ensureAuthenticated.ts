@@ -12,13 +12,13 @@ interface ITokenPayload {
 }
 
 export default function ensureAuthenticated(
-  request: Request, 
-  response: Response, 
-  next: NextFunction 
+  request: Request,
+  response: Response,
+  next: NextFunction
 ): void {
   const authHeader = request.headers.authorization;
 
-  if(!authHeader) {
+  if (!authHeader) {
     throw new AppError('JWT token is missing', 401);
   }
   const [, token] = authHeader.split(' ');
@@ -28,13 +28,13 @@ export default function ensureAuthenticated(
 
     const { sub } = decoded as ITokenPayload;
 
-    request.user = { 
+    request.user = {
       id: sub,
-     };
-  
+    };
+
 
     return next();
-  } catch  {
+  } catch {
     throw new AppError('Invalid JWT token', 401);
   }
 

@@ -15,21 +15,21 @@ import IHashProvider from '@modules/users/providers/HashProvider/models/IHashPro
 import BCryptHashProvider from '@modules/users/providers/HashProvider/implementations/BCryptHashProvider';
 
 container.registerSingleton<IAppointmentsRepository>(
-  'AppointmentsRepository', 
+  'AppointmentsRepository',
   AppointmentsRepository,
-  );
+);
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
   UsersRepository,
-  );
+);
 
-container.registerSingleton<IUserTokensRepository> (
+container.registerSingleton<IUserTokensRepository>(
   'UsersTokensRepository',
   UserTokensRepository,
 );
 
-container.registerSingleton<IHashProvider> (
+container.registerSingleton<IHashProvider>(
   'HashProvider',
   BCryptHashProvider,
 );

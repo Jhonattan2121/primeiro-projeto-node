@@ -16,24 +16,24 @@ describe('CreateUser', () => {
   });
   it('should be able to create a new use', async () => {
     const user = await createUser.execute({
-        name: 'Jhon Ferri',
-        email:  'jhonferri@gmail.com',
-        password: '123456789',
-      });
-      expect(user).toHaveProperty('id');
+      name: 'Jhon Ferri',
+      email: 'jhonferri@gmail.com',
+      password: '123456789',
+    });
+    expect(user).toHaveProperty('id');
   });
 
   it('should not be able to create a new user with same email from another', async () => {
     await createUser.execute({
-        name: 'Jhon Ferri',
-        email:  'jhonferri@gmail.com',
-        password: '123456789',
-      });
-     await  expect(createUser.execute({
-        name: 'Jhon Ferri',
-        email:  'jhonferri@gmail.com',
-        password: '123456789',
-      }),
-       ).rejects.toBeInstanceOf(AppError);
+      name: 'Jhon Ferri',
+      email: 'jhonferri@gmail.com',
+      password: '123456789',
+    });
+    await expect(createUser.execute({
+      name: 'Jhon Ferri',
+      email: 'jhonferri@gmail.com',
+      password: '123456789',
+    }),
+    ).rejects.toBeInstanceOf(AppError);
   });
 });

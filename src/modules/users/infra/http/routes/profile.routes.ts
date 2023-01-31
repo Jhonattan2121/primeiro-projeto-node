@@ -1,11 +1,11 @@
-import {  Router } from "express";
+import { Router } from "express";
 
 import ProfileController from "../controllers/ProfileController";
 
 import ensureAuthenticated from "../middlewares/ensureAuthenticated";
 
 const profileRouter = Router(); // Agendar 
-const  profileController = new ProfileController();
+const profileController = new ProfileController();
 
 profileRouter.use(ensureAuthenticated);
 

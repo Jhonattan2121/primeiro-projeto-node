@@ -6,16 +6,16 @@ import IMailTemplateprovider from "../models/IMailTemplateProvider";
 
 class HandlebarsTemplateProvider implements IMailTemplateprovider {
   public async parse({
-    file, 
+    file,
     variables
-  }: IParseMailproviderDTO): Promise <string> {
-  const templateFileContent = await fs.promises.readFile(file , {
-    encoding: 'utf-8',
-  })
+  }: IParseMailproviderDTO): Promise<string> {
+    const templateFileContent = await fs.promises.readFile(file, {
+      encoding: 'utf-8',
+    })
 
-  const parseTemplate = Handlebars.compile(templateFileContent)
+    const parseTemplate = Handlebars.compile(templateFileContent)
 
-   return parseTemplate(variables);
+    return parseTemplate(variables);
   }
 }
 

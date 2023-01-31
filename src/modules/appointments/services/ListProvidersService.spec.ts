@@ -10,22 +10,22 @@ describe('ListProviders', () => {
 
     listProviders = new ListProvidersService(
       fakeUsersRepository
-      );
+    );
   });
   it('should be able to list the providers', async () => {
-   const  user1 = await fakeUsersRepository.create({
+    const user1 = await fakeUsersRepository.create({
       name: 'Pedro Pascal',
       email: 'pedropascal@test.com',
       password: 'eusou',
     });
 
-   const user2 = await fakeUsersRepository.create({
+    const user2 = await fakeUsersRepository.create({
       name: 'Jhon Ferri',
       email: 'jhonferri@test.com',
       password: 'ruimdemais',
     });
 
-  const loggedUser = await fakeUsersRepository.create({
+    const loggedUser = await fakeUsersRepository.create({
       name: 'Jhon Ferreira',
       email: 'jhonferreira@example.com',
       password: 'nessacoisa',

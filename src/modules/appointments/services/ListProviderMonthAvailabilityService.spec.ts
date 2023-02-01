@@ -75,7 +75,7 @@ describe('ListProviderMonthAvailability', () => {
       month: 8,
     });
 
-    expect(availability).toEqual(expect.arrayContaining([
+    expect(availability).toEqual(expect.arrayContaining([ // Erro de teste
 
       { day: 26, available: false },
       { day: 27, available: true },

@@ -21,7 +21,7 @@ describe('AuthenticateUser', () => {
       fakeHashProvider,
     );
   })
-  it('should be able to authenticate', async () => {
+  it('should be able to authenticate', async () => { // Erro de teste
     const user = await createUser.execute({
       name: 'Jhon Ferri',
       email: 'jhonferri@gmail.com',

@@ -57,7 +57,7 @@ describe('UpdateProfile', () => {
       password: '123123',
     });
 
-    await expect(
+    await expect( // Erro de teste
       updateProfile.execute({
         user_id: user.id,
         name: 'Jhon ferreira',

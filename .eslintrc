@@ -1,5 +1,9 @@
 {
   "rules": {
     "prefer-destructuring": ["error", {"object": true, "array": false}]
-  }
+  },
+  "eslint.workingDirectories": [
+    "./client", // Does not change the process's working directory
+    { "directory": "./server", "changeProcessCWD": true }
+  ]
 }

@@ -1,4 +1,8 @@
 {
+  "eslint.lintTask.options": "-c C:/mydirectory/.eslintrc.json --ignore-path C:/mydirectory/.eslintignore .",
+  "eslint.options": { "configFile": "C:/mydirectory/.eslintrc.json" },
+  "eslint.validate": [ "javascript", "javascriptreact", { "language": "html", "autoFix": true } ],
+
   "env": {
       "es2021": true,
       "es6": true,

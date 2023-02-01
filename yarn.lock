@@ -2270,6 +2270,11 @@
   dependencies:
     "@types/node" "*"
 
+"@types/hapi__joi@^17.1.9":
+  version "17.1.9"
+  resolved "https://registry.yarnpkg.com/@types/hapi__joi/-/hapi__joi-17.1.9.tgz#fb4001df38aba1cd2406ce4b17d4e6fc3b0bd036"
+  integrity sha512-oOMFT8vmCTFncsF1engrs04jatz8/Anwx3De9uxnOK4chgSEgWBvFtpSoJo8u3784JNO+ql5tzRR6phHoRnscQ==
+
 "@types/ioredis@^4.27.8":
   version "4.28.10"
   resolved "https://registry.yarnpkg.com/@types/ioredis/-/ioredis-4.28.10.tgz#40ceb157a4141088d1394bb87c98ed09a75a06ff"

@@ -2,9 +2,9 @@ import { inject, injectable } from 'tsyringe';
 import path from 'path';
 
 import AppError from '@shared/errors/AppError';
+import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
 import IUserTokensRepository from '../repositories/IUserTokensRepository';
-import IMailProvider from '@shared/container/providers/MailProvider/models/IMailProvider';
 
 interface IRequest {
   email: string;
@@ -48,7 +48,7 @@ class SendForgotPasswordEmailService {
         file: forgotPasswordTemplate,
         variables: {
           name: user.name,
-          link: `http://localhost:3000/reset_password?token${token}`,
+          link: `${process.env.APP_WEB_URL}/reset_password?token${token}`,
         },
       },
     });

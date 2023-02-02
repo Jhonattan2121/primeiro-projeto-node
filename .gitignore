@@ -3,6 +3,7 @@ yarn.lock/
 .vscode/
 .idea/
 temp/
-
+.env
 tmp/*
+ormconfig.json
 !tmp/ .gitkeep

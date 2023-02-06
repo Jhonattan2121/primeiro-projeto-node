@@ -12,9 +12,6 @@ import UsersRepository from '@modules/users/infra/typeorm/repositories/UsersRepo
 import IUserTokensRepository from "@modules/users/repositories/IUserTokensRepository";
 import UserTokensRepository from "@modules/users/infra/typeorm/repositories/UserTokensRepository";
 
-import IHashProvider from '@modules/users/providers/HashProvider/models/IHashProvider';
-import BCryptHashProvider from '@modules/users/providers/HashProvider/implementations/BCryptHashProvider';
-
 import INotificationsRepository from "@modules/notifications/repositories/INotificationsRepository";
 import NotificationsRepository from "@modules/notifications/infra/typeorm/repositories/NotificationsRepository";
 
@@ -31,11 +28,6 @@ container.registerSingleton<IUsersRepository>(
 container.registerSingleton<IUserTokensRepository>(
   'UsersTokensRepository',
   UserTokensRepository,
-);
-
-container.registerSingleton<IHashProvider>(
-  'HashProvider',
-  BCryptHashProvider,
 );
 
 container.registerSingleton<INotificationsRepository>(

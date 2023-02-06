@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { celebrate , Segments, Joi} from "celebrate";
 
-import SessionsController from "../controllers/SessionsController";
+import SessionsController from "../controller/SessionsController";
 
 
 const sessionsRouter = Router();

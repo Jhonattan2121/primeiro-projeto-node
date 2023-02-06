@@ -25,12 +25,12 @@ describe('AuthenticateUser', () => {
     const user = await createUser.execute({
       name: 'Jhon Ferri',
       email: 'jhonferri@gmail.com',
-      password: '123456789',
+      password: 'eusou',
     });
 
     const response = await authenticateUser.execute({
       email: 'jhonferri@gmail.com',
-      password: '123456789',
+      password: 'eusou',
     });
 
     expect(response).toHaveProperty('token');
@@ -40,7 +40,7 @@ describe('AuthenticateUser', () => {
   it('should not be able to authenticate with non existing user', async () => {
     await expect(authenticateUser.execute({
       email: 'jhonferri@gmail.com',
-      password: '123456789'
+      password: 'eusou'
     }),
     ).rejects.toBeInstanceOf(AppError);
   });
@@ -49,7 +49,7 @@ describe('AuthenticateUser', () => {
     await createUser.execute({
       name: 'Jhon Ferri',
       email: 'jhonferri@gmail.com',
-      password: '123456789',
+      password: 'eusou',
     });
 
     await expect(authenticateUser.execute({

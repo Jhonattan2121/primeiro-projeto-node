@@ -16,6 +16,8 @@
   "emitDecoratorMetadata": true,
   "rootDir": "./src",
 "esModuleInterop": true,
+"moduleResolution": "node",
+"resolveJsonModule": true,
 "forceConsistentCasingInFileNames": true,
 "strictNullChecks": false,
 "skipLibCheck": true
